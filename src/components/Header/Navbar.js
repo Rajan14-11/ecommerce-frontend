@@ -1,11 +1,46 @@
 import React from 'react'
 import { Container, Nav, Navbar, NavDropdown } from "react-bootstrap";
+import {useDispatch, useSelector } from 'react-redux';
 import {NavLink,Link} from "react-router-dom"
-function navbar() {
+import { signout } from '../../actions/auth.actions';
+function Header() {
+
+const auth = useSelector(state=>state.auth)
+const dispatch = useDispatch()
+
+const logOut =()=>{
+  dispatch(signout())
+}
+
+const renderLoggedInLinks = ()=>{
+return (
+  <Nav>
+    <li className='nav-item'>
+      <span className='nav-link' onClick={logOut}>Signout</span>
+    </li>
+  </Nav>
+)
+}
+
+const renderNonLoggedInLinks = ()=>{
+return (<Nav>
+              <li className="nav-item">
+                <NavLink className="nav-link" to="/signin">
+                  SignIn
+                </NavLink>
+              </li>
+              <li className="nav-item">
+                <NavLink className="nav-link" to="/signup">
+                  SignUp
+                </NavLink>
+              </li>
+            </Nav>)
+}
+
   return (
     <>
-      <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
-        <Container>
+      <Navbar collapseOnSelect fixed='top' expand="lg" bg="dark" variant="dark" style={{zIndex:1}}>
+        <Container fluid>
           <Link to='/' className="navbar-brand">Admin Dashboard</Link>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
@@ -23,18 +58,8 @@ function navbar() {
               </NavDropdown.Item>
             </NavDropdown> */}
             </Nav>
-            <Nav>
-              <li className="nav-item">
-                <NavLink className="nav-link" to="/signin">
-                  SignIn
-                </NavLink>
-              </li>
-              <li className="nav-item">
-                <NavLink className="nav-link" to="/signup">
-                  SignUp
-                </NavLink>
-              </li>
-            </Nav>
+            {auth.authenticate ?renderLoggedInLinks():renderNonLoggedInLinks() }
+
           </Navbar.Collapse>
         </Container>
       </Navbar>
@@ -42,4 +67,4 @@ function navbar() {
   );
 }
 
-export default navbar
+export default Header
