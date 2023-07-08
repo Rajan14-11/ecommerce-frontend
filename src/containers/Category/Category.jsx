@@ -71,7 +71,7 @@ function Category(props) {
   const renderCategories = (categories) => {
     let mycategories = [];
     for (let category of categories) {
-      // console.log(category.children.length);
+      console.log(category.children);
       mycategories.push(
         {
           label: category.name,
@@ -89,6 +89,7 @@ function Category(props) {
         // </li>
       );
     }
+    console.log(mycategories)
     return mycategories;
   };
 

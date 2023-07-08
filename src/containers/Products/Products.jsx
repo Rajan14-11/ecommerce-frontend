@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Col, Container, Row, Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { addProduct } from "../../actions";
+import { addProduct, deleteProductById } from "../../actions";
 import Layout from "../../components/Layout/index";
 import Input from "../../components/UI/Input/input";
 import NewModal from "../../components/UI/Modal/Modal";
@@ -12,6 +12,8 @@ function Products(props) {
   const dispatch = useDispatch();
   const product = useSelector((state) => state.product);
   const category = useSelector((state) => state.category);
+
+  console.log(product,category)
 
   const [show, setShow] = useState(false);
   const [name, setName] = useState("");
@@ -85,8 +87,8 @@ function Products(props) {
                     <td>{product.price}</td>
                     <td>{product.quantity}</td>
                     <td>{product.category.name}</td>
-                    {/* <td>
-                  <button onClick={() => showProductDetailsModal(product)}>
+                    <td>
+                  <button onClick={() => showProductDetailsModel(product)}>
                     info
                   </button>
                   <button
@@ -99,7 +101,7 @@ function Products(props) {
                   >
                     del
                   </button>
-                </td> */}
+                </td>
                   </tr>
                 );
               })
