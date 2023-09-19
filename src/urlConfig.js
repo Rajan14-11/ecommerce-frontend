@@ -1,4 +1,4 @@
-export const api = "https://backend-ecommerce-ten.vercel.app/";
+export const api = "https://ecommerce-backend-rajan1.onrender.com/api/";
 export const generatePublicUrl = (fileName)=>{
-    return `https://backend-ecommerce-ten.vercel.app/public/${fileName}`;
+    return `https://ecommerce-backend-rajan1.onrender.com//public/${fileName}`;
 }
